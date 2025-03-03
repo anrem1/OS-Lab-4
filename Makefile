@@ -182,7 +182,8 @@ UPROGS=\
 	_wc\
 	_zombie\
 	_getppid_test\
-	_getuid_test
+	_getuid_test\
+	_priority
 fs.img: mkfs README $(UPROGS)
 	./mkfs fs.img README $(UPROGS)
 
