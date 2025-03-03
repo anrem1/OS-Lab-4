@@ -89,6 +89,12 @@ sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
+
 int sys_getppid(void) {
     return myproc()->parent->pid;
+}
+
+int 
+sys_getuid(void) {
+  return myproc()->uid;  // Return the UID of the calling process
 }
