@@ -98,3 +98,23 @@ int
 sys_getuid(void) {
   return myproc()->uid;  // Return the UID of the calling process
 }
+
+int
+sys_setpriority(void)
+{
+  int pid, priority;
+
+    if (argint(0, &pid) < 0 || argint(1, &priority) < 0)
+        return -1;
+
+    return set_priority(pid, priority);
+}
+
+int
+sys_getpriority(void)
+{
+    int pid;
+    if (argint(0, &pid) < 0)
+        return -1;
+    return getpriority(pid);
+}
