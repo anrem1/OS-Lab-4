@@ -2,6 +2,7 @@
 #include "user.h"
 
 int main() {
-    printf("User ID: %d\n", getuid());
+    int uid = getuid();
+    printf(1, "User ID: %d\n", uid);
     exit();
 }
