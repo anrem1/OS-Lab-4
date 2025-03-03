@@ -1,6 +1,6 @@
 #include "types.h"
 #include "stat.h"
-#include "fcntl.h"
+---#include "fcntl.h"
 #include "user.h"
 #include "x86.h"
 
@@ -82,7 +82,11 @@ atoi(const char *s) {
         n = n * 10 + *s++ - '0';
     return n;
 }
+#include "user.h"
 
+int getuid(void) {
+    return syscall(SYS_getuid);
+}
 
 
 
