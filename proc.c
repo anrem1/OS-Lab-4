@@ -355,6 +355,45 @@ scheduler(void)
   }
 }
 
+int
+setpriority(int pid, int new_priority)
+{
+    struct proc *p;
+
+    // Check if priority is within some valid range (0 to 100)
+    if (new_priority < 0 || new_priority > 100)
+        return -1;  // invalid priority value
+
+    acquire(&ptable.lock);  
+
+    for (p = ptable.proc; p < &ptable.proc[NPROC]; p++) {
+        if (p->pid == pid) {
+            p->priority = new_priority;  
+            release(&ptable.lock);
+            return 0;  
+        }
+    }
+
+    release(&ptable.lock); 
+    return -1;  
+}
+
+int
+getpriority(int pid)
+{
+    struct proc *p;
+    acquire(&ptable.lock);
+    for (p = ptable.proc; p < &ptable.proc[NPROC]; p++) {
+        if (p->pid == pid) {
+            int priority = p->priority;
+            release(&ptable.lock);
+            return priority;
+        }
+    }
+    release(&ptable.lock);
+    return -1;  
+}
+
 // Enter scheduler.  Must hold only ptable.lock
 // and have changed proc->state. Saves and restores
 // intena because intena is a property of this
