@@ -1,0 +1,9 @@
+#include "types.h"
+#include "stat.h"
+#include "user.h"
+
+int main() {
+    int uid = getuid();
+    printf("User ID: %d\n", uid);
+    exit();
+}
